@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet" crossorigin="anonymous">
+    <title>Tính tiền vay online</title>
+    <meta name="description" content="Công cụ tính lịch trả nợ vay ngân hàng với dư nợ giảm dần">
+</head>
+<body>
+<!-- <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light shadow pt-3 pb-3">
+    <div class="container justify-content-between">
+        <a class="navbar-brand" href="/">
+            <img src="logo.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
+            Mytul
+        </a>
+    </div>
+</nav> -->
+
+<main class="container" id="main">
+    <div class="bg-light p-5 rounded">
+        <h1>Tính tiền vay online</h1>
+        <p class="lead">Công cụ tính lịch trả nợ vay ngân hàng với dư nợ giảm dần có thể hỗ trợ bạn tính nhanh số tiền cần chi trả mỗi tháng dựa trên tổng số tiền, lãi suất ngân hàng và thời hạn vay của bạn.
+            Có hai cách tính mà bạn có thể lựa chọn một là <strong>gốc cố định lãi giảm dần</strong>, hai là <strong>gốc và lãi chia đều hàng tháng</strong>.</p>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6 col-sm-12">
+            <form id="frmTienVay">
+                <div class="row mb-3">
+
+                    <div class="col-md-12">
+                        <label class="col-form-label" for="txtMoney"><strong>Số tiền vay:</strong></label>
+                        <div class="input-group mb-1">
+                            <input type="text" class="form-control form-control-lg text-center fs-24" id="txtMoney" name="money" value="0">
+                            <span class="input-group-text">VND</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <label>1 triệu</label>
+                            <label>500 triệu</label>
+                        </div>
+                        <input type="range" class="form-range" max="500000000" min="1000000" step="1000000" value="" id="sliderMoney">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label class="col-form-label" for="txtInterestRate"><strong>Lãi suất:</strong></label>
+                        <div class="input-group mb-1">
+                            <input type="text" class="form-control form-control-lg text-center fs-24" id="txtInterestRate" min="1" name="interestRate" value="0">
+                            <span class="input-group-text">% / năm</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <label>1%</label>
+                            <label>20%</label>
+                        </div>
+                        <input type="range" class="form-range" max="20" min="1" step="0.1" value="0" id="sliderInterestRate">
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="chkAfterPromotion" name="chkAfterPromotion">
+                            <label class="form-check-label" for="chkAfterPromotion">Lãi suất ưu đãi</label>
+                        </div>
+
+                        <div class="row d-none" id="chkAfterPromotionFields">
+                            <div class="col-lg-6 col-sm-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control form-control-lg fs-24" id="txtPeriodPromotion" min="1" name="periodPromotion" value="">
+                                    <label for="txtPeriodPromotion">Thời gian ưu đãi (tháng) *</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control fs-24" id="txtInterestRateAfterPromotion" min="1" name="interestRateAfterPromotion" value="">
+                                    <label for="txtInterestRateAfterPromotion">Lãi suất sau ưu đãi (%) *</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+
+                    <div class="col-md-12">
+                        <label class="col-form-label" for="txtMonth"><strong>Thời gian vay:</strong></label>
+                        <div class="input-group mb-1">
+                            <input type="text" class="form-control form-control-lg text-center fs-24" id="txtMonth" min="1" name="month" value="0">
+                            <span class="input-group-text" >tháng</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <label>1 tháng</label>
+                            <label>300 tháng</label>
+                        </div>
+                        <input type="range" class="form-range" max="300" min="1" step="1" value="0" id="sliderMonth">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-12 pt-2">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="method" id="rdoRepayTrue" value="goc_co_dinh" checked>
+                            <label class="form-check-label" for="rdoRepayTrue">Gốc cố định, lãi giảm dần</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="method" id="rdoRepayFalse" value="goc_lai_chia_deu">
+                            <label class="form-check-label" for="rdoRepayFalse">Gốc, lãi chia đều hàng tháng</label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="d-block d-md-none d-lg-none">
+                <hr>
+            </div>
+            <div class="wraper-summary">
+                <div class="mt-4">
+                    <div><span class="badge bg-primary mr-16">1</span> <strong>Số tiền trả tháng đầu</strong></div>
+                    <div class="text-primary display-6 font-weight-bold mt-3" id="firstMonth"></div>
+                </div>
+                <div class="mt-4">
+                    <div><span class="badge bg-primary mr-16">1</span> <strong>Tổng lãi phải trả</strong></div>
+                    <div class="text-primary display-6 font-weight-bold mt-3" id="totalPaymentInterestRate"></div>
+                </div>
+                <div class="mt-4">
+                    <div><span class="badge bg-primary mr-16">2</span> <strong>Tổng tiền gốc và lãi phải trả</strong></div>
+                    <div class="text-primary display-6 font-weight-bold mt-3" id="totalAmount"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            <div>
+                <p class="text-center mb-0 text-primary display-6">Số tiền trả hàng tháng</p>
+                <canvas id="chart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            <div class="d-flex justify-content-end">
+                <a href="" id="download-csv" class="d-none">Tải xuống csv</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-secondary table-striped table-hover d-none" id="table">
+                    <thead>
+                    <tr>
+                        <th scope="col" width="30">#</th>
+                        <th scope="col" title="Tiền gốc trả được hàng tháng">Tiền gốc</th>
+                        <th scope="col" title="Tiền lãi trả mỗi tháng">Tiền lãi</th>
+                        <th scope="col" title="Tổng tiền gốc và lãi cần trả mỗi tháng">Gốc & lãi</th>
+                        <th scope="col" title="Số tiền gốc còn nợ">Gốc còn lại</th>
+                        <th scope="col" title="Tổng tiền lãi đã trả được">Tổng lãi</th>
+                        <th scope="col" title="Tổng số tiền gốc đã trả được">Tổng gốc</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <style>
+        @media (min-width: 768px) {
+            .wraper-summary {
+                border-left: 1px solid rgb(206, 212, 218);
+                padding-left: 16px;
+                margin-top: 40px;
+                height: calc(100% - 48px);
+            }
+        }
+        /*input[type=range]::-webkit-slider-thumb {*/
+        /*    background: var(--bs-orange);*/
+        /*}*/
+    </style>
+</main>
+
+<script src="js/bootstrap.bundle.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
+<script src="js/chart.min.js"></script>
+<script src="js/autoNumeric-min.js"></script>
+<script src="app.js?=2"></script>
+</body>
+</html>
